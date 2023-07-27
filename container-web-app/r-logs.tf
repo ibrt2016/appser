@@ -2,7 +2,7 @@ module "diagnostics" {
   source  = "../../AzureMonitor/Diag"
   count = var.logs_destinations_ids == null ? 0 : 1
 
-  resource_id = azurerm_service_plan.plan.id
+  resource_id = azurerm_linux_web_app.app_service_linux_container.id
 
   logs_destinations_ids = var.logs_destinations_ids
   log_categories        = var.logs_categories
