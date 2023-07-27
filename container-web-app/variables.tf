@@ -250,13 +250,29 @@ variable "staging_slot_custom_app_settings" {
   default     = null
 }
 
-variable "docker_image" {
-  description = "Docker image to use for this App Service"
-  type = object({
-    name     = string
-    tag      = string
-    slot_tag = optional(string)
-  })
+variable "docker_image_name" {
+  description = "Docker image name to use for this App Service"
+  type = string
+}
+
+variable "docker_image_name_slot" {
+  description = "Docker image name to use for this App Service"
+  type = string
+}
+
+variable "docker_registry_url" {
+  description = "Docker registry url to use for this App Service"
+  type = string
+}
+
+variable "docker_registry_username" {
+  description = "Docker registry username to use for this App Service"
+  type = string
+}
+
+variable "docker_registry_password" {
+  description = "Docker registry password to use for this App Service"
+  type = string
 }
 
 variable "app_service_logs" {
