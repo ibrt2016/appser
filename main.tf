@@ -81,6 +81,18 @@ module "container_web_app" {
     }
   }
 
+  auth_settings_v2 = {
+    auth_enabled = true
+    require_authentication = true
+    default_provider = "myOidc"
+    custom_oidc_v2 = {
+      name = "myOidc"
+      client_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      openid_configuration_endpoint = "https://www.example.com"
+    }
+
+  }
+
   # custom_domains = {
   #   # Custom domain with SSL certificate file
   #   # "example.com" = {

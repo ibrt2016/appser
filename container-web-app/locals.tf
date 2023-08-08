@@ -120,4 +120,29 @@ locals {
     client_secret     = null
     allowed_audiences = []
   }
+
+  auth_settings_v2 = merge(
+    {
+      auth_enabled           = false
+      require_authentication = false
+      unauthenticated_action = "RedirectToLoginPage"
+      default_provider       = "MyOIDCProvider"
+      custom_oidc_v2         = null
+    },
+  var.auth_settings_v2)
+
+  auth_settings_custom_oidc_v2 = merge(
+    {
+      name                          = null
+      client_id                     = null
+      openid_configuration_endpoint = null
+
+    },
+  local.auth_settings_v2.custom_oidc_v2 == null ? local.auth_settings_oidc_default : var.auth_settings_v2.custom_oidc_v2)
+
+  auth_settings_oidc_default = {
+    name                          = null
+    client_id                     = null
+    openid_configuration_endpoint = null
+  }
 }

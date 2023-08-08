@@ -112,6 +112,27 @@ resource "azurerm_linux_web_app" "app_service_linux_container" {
     }
   }
 
+  auth_settings_v2 {
+    auth_enabled           = local.auth_settings_v2.auth_enabled
+    require_authentication = local.auth_settings_v2.require_authentication
+    unauthenticated_action = local.auth_settings_v2.unauthenticated_action
+    default_provider       = local.auth_settings_v2.default_provider
+
+
+    dynamic "custom_oidc_v2" {
+      for_each = local.auth_settings_custom_oidc_v2.client_id == null ? [] : [local.auth_settings_custom_oidc_v2]
+      content {
+        name                          = local.auth_settings_custom_oidc_v2.name
+        client_id                     = local.auth_settings_custom_oidc_v2.client_id
+        openid_configuration_endpoint = local.auth_settings_custom_oidc_v2.openid_configuration_endpoint
+      }
+    }
+
+    login {
+      
+    }
+  }
+
   client_affinity_enabled    = var.client_affinity_enabled
   client_certificate_enabled = var.client_certificate_enabled
   https_only                 = var.https_only
